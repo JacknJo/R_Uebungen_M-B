@@ -10,9 +10,11 @@ Alle Angaben sind ohne Gewähr.
 ## Ausführung
 Die Skripte wurden nur unter Linux getestet.
 Zum Übersetzen eines einzelnen Skripts:
+
     Rscript <name>
 
 Zum Generieren aller pdfs:
+
     find -type f -name '*.R' -exec Rscript {} \;
 
 ## Erstellen einer Dokumentation des Codes
