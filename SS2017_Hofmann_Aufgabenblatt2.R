@@ -25,9 +25,6 @@ print(rRges)
 
 rR = c(rRgross, "", rRklein, "", rRges, "")
 
-### Forschungshypothese H1: Entwicklung der letzten 5 Jahre war positiv
-### Nullhypothese H0 : Entwicklung der letzen 5 Jahre war negativ
-
 tabelle = data.frame(a, eP, eN, pP, pN, rR)
 colnames(tabelle) = c("Ausbildung", "N pos", "N neg", "pos [%]", "neg [%]", "Rel Risiko")
 print(tabelle)
