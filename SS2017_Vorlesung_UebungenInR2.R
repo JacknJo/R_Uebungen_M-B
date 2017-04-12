@@ -30,11 +30,9 @@ qbinom(0.95, n, p)
 # Darstellung von Binomialwahrscheinlichkeiten 
 ### Erzeugung eines Vektors von äquidistanten x-Werten
 x = 0 : 10
-
-x
+print(x)
 
 seq(0, 10)
-
 seq(0, 10, by = 0.25)
 
 ### Berechnung der Binomialwahrscheinlichkeiten
@@ -137,8 +135,8 @@ w = n*p_beob
 print(w)
 
 ### z-Wert durch Normalverteilungsapproximation
-#### round(mathematisches runden auf spezifizierten NK)
-#### ceiling(aufrunden auf int), floor(abrunden auf int)
+### round(mathematisches runden auf spezifizierten NK)
+### ceiling(aufrunden auf int), floor(abrunden auf int)
 z = round((w -n*p)/sqrt(n*p*(1-p)), 2)
 print(z)
 
