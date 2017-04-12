@@ -118,6 +118,71 @@ p = 0.5
 1 - pbinom(529, n, p)
 
 ## Normalverteilungsapproximation
+### Ohne Stetigkeitskorrektur
 1- pnorm((530-n*p)/sqrt(n*p*(1-p)))
+### Mit Stetigkeitskorrektur
+1 - pnorm((529.5 - n*p)/sqrt(n*p*(1-p)))
 
-o = dev.off();
+
+## Erzeugung der Tabelle (Beispiel Mädchengeburten)
+### Tatsächliche Wahrscheinlichkeit
+p = 0.5
+### Beobachtete Wahrscheinlichkeit
+p_beob = 0.51
+
+### Stichprobengrößen
+n = c(100, 1000, 3000, 5000, 10000, 50000)
+### Beobachtete Mädchenzahlen
+w = n*p_beob
+print(w)
+
+### z-Wert durch Normalverteilungsapproximation
+#### round(mathematisches runden auf spezifizierten NK)
+#### ceiling(aufrunden auf int), floor(abrunden auf int)
+z = round((w -n*p)/sqrt(n*p*(1-p)), 2)
+print(z)
+
+pW = round(1-pnorm(z), 4)
+print(pW)
+
+tabelle1 = cbind(n, w, z, pW)
+
+### Data Frames:
+### Variablen stehen in Spalten, Beobachtungen in Zeilen
+tabelle2 = data.frame(n, w, z, pW)
+
+### Einsicht in die von R erzeugten Objekte
+### Matrix 'ungewöhnlich' für R
+class(tabelle1)
+### Data Frame 'besser'
+class(tabelle2)
+
+### Nicht nur optisch fast kein Unterschied, auch bei den meisten Rechnungen egal.
+print(tabelle1)
+print(tabelle2)
+
+### Setzen der Namen
+colnames(tabelle2)  = c("N", "Anzahl M", "z-Wert", "p-Wert")
+print(tabelle2)
+
+### Get working directory
+getwd()
+
+### Set working directory
+setwd("/data/Dokumente/Studium/Master/Medizin- und Biostatistik")
+getwd()
+
+### csv2: Europäischer csv Standard (Punkt und Kommata)
+write.csv2(tabelle2, "Tabelle.csv", row.names = FALSE)
+
+### Rücklesen der gespeicherten Daten
+tabelle3 = read.csv2("Tabelle.csv")
+print(tabelle3)
+
+### skip überspringt die ersten 3 Zeilen Daten
+### header = FALSE: erste Zeile wird nicht als Namen, sondern bereits als Daten interpretiert.
+tabelle4 = read.csv2("Tabelle.csv", skip = 3, header = FALSE)
+tabelle4
+
+### kritischer Wert - Standardnormalverteilungsquantil
+qnorm(0.95)
