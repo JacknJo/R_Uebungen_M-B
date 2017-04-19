@@ -49,6 +49,9 @@ print(tabelle)
 ## 12. April 2017
 
 print("Übung 4")
+### Herleitung über Binomialformel:
+### 1 - (n 0) (a*)^0 * (1-a*)^(n-0) = a
+
 ### a) Exakte Berechnung:
 ### https://de.wikipedia.org/wiki/Alphafehler-Kumulierung
 ### as = 1 - (1 - a)^(1/n)
