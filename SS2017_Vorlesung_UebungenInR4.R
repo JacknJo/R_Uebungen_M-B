@@ -59,3 +59,31 @@ chisq.test(beob, p = erw/n, rescale.p = TRUE)
 
 ### R - Rechnet zweiseitig und nicht wie 'zu Fuß' einseitig.
 ### -> manuelles teilen durch 2.
+
+# Multinomialverteilungen in R
+
+## Berechnung der Multinomialwahrscheinlichkeiten
+x_star = c(0, 3, 0)
+p_null = c(0.7, 0.2, 0.1)
+
+dmultinom(x_star, 3, p_null)
+
+## Berechnung Anzahl der Besetzungsmöglichkeiten
+n = 3
+k = 3
+choose (n + k - 1, k -1)
+
+## Erzeugung von 5 Zufallsvektoren aus Mult(n,p)
+n = 10
+
+### Nicht beabsichtigt: Summe > 1.
+### Aber intern skaliert.
+p = c(0.22, 0.33, 0.55)
+p = c(0.22, 0.33, 0.45)
+rmultinom(5, n, p)
+
+# Beispiel Skelettanomalien bei Neugeborenen.
+library("EMT")
+
+out = multinomial.test(observed = x_star, prob = p_null)
+plotMultinom(out)
