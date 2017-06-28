@@ -31,3 +31,56 @@ tafel
 ergebnis = mantelhaen.test(x = tafel, alternative = c("two.sided"), correct = FALSE, exact = FALSE)
 ergebnis$statistic
 ergebnis$estimate
+
+## kxm - Felder Chi-Quadrat-Test in R
+### chisq.test(x, y = NULL, correct = TRUE, p, rescale.p = FALSE)
+### x: matrix der kxm Felder-Tafel
+### correct = TRUE: Stetigkeitskorrektur nur bei 2x2 Feldertafeln.
+### chisq.test()$estimated: unter H0 erwartete Häufigkeiten
+### (chisq.test()$residuals)^2: einzelne Summanden der Teststatistik
+
+tafel = matrix(c(28, 9, 3, 17, 1, 2, 5, 0, 25), 3, 3, byrow = TRUE)
+dimnames(tafel) = list(c("Staphylokokken", "Streptokokken", "Pseudomonas aeruginos"), c("sehr positiv", "positiv", "negativ"))
+
+tafel
+### Warnung, da Erwartungswerte < 5.
+chisq.test(tafel, correct = TRUE)
+chisq.test(tafel)
+chisq.test(tafel)$expected
+(chisq.test(tafel)$residuals)^2
+
+
+## McNemar Test in R
+### mcnemar.test(x, y = NULL, correct = TRUE)
+### x: Matrix der Vierfeldertafel
+### correct = TRUE: Stetigkeitskorrektur
+### implementiert ist der zweiseitige Test
+
+tafel = matrix(c(9, 15, 4, 10), 2, 2, byrow = TRUE)
+dimnames(tafel) = list(c("A: starke Wirkung", "B: starke Wirkung"), c("A: geringe Wirkung", "B: geringe Wirkung"))
+tafel
+mcnemar.test(tafel, correct = TRUE)
+mcnemar.test(tafel, correct = FALSE)
+
+## Mediantest in R
+isol = c(1, 4, 1, 2, 2, 1, 5, 1, 2)
+integ = c(1, 4, 4, 1, 3, 2, 4, 4, 5, 4, 4)
+
+med = median(c(isol, integ))
+med
+
+n11 = sum(isol  > med)
+n12 = sum(integ > med)
+n21 = sum(isol  < med)
+n22 = sum(integ < med)
+
+tafel = matrix(c(n11, n12, n21, n22), 2, 2, byrow = TRUE)
+dimnames(tafel) = list(c("größer MED", "kleiner MED"), c("isoliert", "nicht isoliert"))
+
+dchisq(0.9, 1)
+
+chisq.test(tafel, correct = TRUE)
+chisq.test(tafel)$expected
+
+### einseitig
+fisher.test(tafel, alternative = "less")
